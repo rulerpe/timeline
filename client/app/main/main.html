@@ -2,11 +2,16 @@
 
 <div class="container">
   <input type="text" ng-model="title" placeholder="Enter a name" typeahead="name for name in wikiSearch($viewValue)" class="form-control">
-  <div class="btn" ng-click="findInfo()">Search</div>
-  <div id="box">
-    <div timeline></div>
+  <div class="btn" ng-click="getInfo()">Search</div>
+  <div class="btn" ng-click="findInfo.generateMainLine(200); timeWidth={width:'16000px'}">+</div>
+  <div class="btn" ng-click="findInfo.generateMainLine(20); timeWidth={width:'1600px'}">-</div>
+</div>
+
+<div id="box">
+  <div class="timeLineContainer" ng-style="timeWidth">
+    <timeline info></timeline>
   </div>
-  
+    
 </div>
 
 <footer class="footer">
