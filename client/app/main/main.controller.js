@@ -8,5 +8,5 @@ angular.module('timelineApp')
     $scope.getInfo = function(){
     	$scope.findInfo.findInfo(wikisearch.currentName);
     };
-    $scope.findInfo.generateMainLine(20);
+    $scope.findInfo.generateMainLine(21);
   });

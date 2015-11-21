@@ -6,7 +6,6 @@ angular.module('timelineApp')
       templateUrl: 'app/timeline/timeline.html',
       restrict: 'EA',
       controller: function ($scope, $attrs, findinfo) {
-      	console.log(findinfo.mainLine);
       	$scope.mainLine = findinfo.mainLine;
       }
     };

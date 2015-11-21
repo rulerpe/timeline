@@ -1,6 +1,24 @@
 .slots {
 	height: 100%;
 	width: 80px;
-	border-left: 1px solid black;
+	border-left: 1px solid #c9c9c9;
 	display: inline-block;
+}
+
+.slots div {
+	width: 100%;
+}
+
+.born {
+	background-color: #c5d5cb;
+	height: 40%;
+}
+.event {
+	background-color: #9fa8a3;
+	border-bottom: 1px solid #1d2120;
+	height: 20%;
+}
+.die {
+	background-color: #e3e0cf;
+	height: 40%;
 }
