@@ -57,8 +57,31 @@ angular.module('timelineApp')
  
     data.addPerson = function(personObj){
       console.log(personObj);
-      var personInfo = {};
+      var year = getYear(personObj.extract);
+      var personInfo = {
+        name: personObj.title,
+        born: year.born,
+        die: year.die
+      };
       
+      data.zoomedOutLine[Math.floor(year.born/100)].born.push({name:personObj.title , born: year.born});
+      data.zoomedInLine[Math.floor(year.born/10)].born.push({name:personObj.title , born: year.born});
+      if(year.die){
+        data.zoomedOutLine[Math.floor(year.die/100)].die.push({name:personObj.title , born: year.die});
+        data.zoomedInLine[Math.floor(year.die/10)].die.push({name:personObj.title , born: year.die});
+      }
+      console.log(data.zoomedOutLine)
+    }
+
+    function getYear(extractStr){
+      var result = {};
+      if(extractStr.match(/(born).+?\d{4}/i)){
+        result.born = extractStr.match(/(born).+?\d{4}/i)[0].slice(-4)
+      }else {
+        result.born = extractStr.match(/\d{4}.{4,}\d{4}/g)[0].slice(0,4);
+        result.die = extractStr.match(/\d{4}.{4,}\d{4}/g)[0].slice(-4);
+      }
+      return result;
     }
 
 
