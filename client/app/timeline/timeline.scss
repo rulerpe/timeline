@@ -3,6 +3,7 @@
 	width: 80px;
 	border-left: 1px solid #c9c9c9;
 	display: inline-block;
+	font-size: 0.85em;
 }
 
 .slots div {
@@ -12,15 +13,35 @@
 .born {
 	background-color: #c5d5cb;
 	height: 40%;
+	overflow: hidden;
 }
 .event {
 	background-color: #9fa8a3;
 	border-bottom: 1px solid #1d2120;
 	height: 20%;
+	position: relative;
+}
+.event p {
+	position: absolute;
+	bottom: 0;
+	left:0;
 }
 .die {
 	background-color: #e3e0cf;
 	height: 40%;
+	overflow: hidden;
+}
+img {
+	display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+.die img {
+	filter: grayscale(100%);
+}
+.person {
+	width: 100%;
+	display: block;
 }
 
 .year {

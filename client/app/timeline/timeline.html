@@ -1,14 +1,18 @@
 <div class="slots" ng-repeat ="year in mainLine">
 	<div class="born">
 		<div class="person" ng-repeat = "person in year.born">
-			{{person.name}}{{person.born}}
+			<img src="{{person.img}}" alt="">
+			<p>{{person.name}} {{person.born}}</p>
 		</div>
 	</div>
-	<div class="event">{{year.event.name}}  {{year.event.year}}</div>
+	<div class="event" >
+		<p ng-show="year.event.name">{{year.event.name}} ({{year.event.year}})</p>
+	</div>
 	<div class="die">
 		<div class="year">{{year.year}}</div>
 		<div class="person" ng-repeat = "person in year.die">
-			{{person.name}}{{person.die}}
+			<img src="{{person.img}}" alt="">
+			<p>{{person.name}} {{person.die}}</p>
 		</div>
 	</div>
 </div>

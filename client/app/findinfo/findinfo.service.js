@@ -58,29 +58,27 @@ angular.module('timelineApp')
     data.addPerson = function(personObj){
       console.log(personObj);
       var year = getYear(personObj.extract);
-      var personInfo = {
-        name: personObj.title,
-        born: year.born,
-        die: year.die
-      };
-      
-      data.zoomedOutLine[Math.floor(year.born/100)].born.push({name:personObj.title , born: year.born});
-      data.zoomedInLine[Math.floor(year.born/10)].born.push({name:personObj.title , born: year.born});
+      data.zoomedOutLine[Math.floor(year.born/100)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
+      data.zoomedInLine[Math.floor(year.born/10)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
       if(year.die){
-        data.zoomedOutLine[Math.floor(year.die/100)].die.push({name:personObj.title , born: year.die});
-        data.zoomedInLine[Math.floor(year.die/10)].die.push({name:personObj.title , born: year.die});
+        data.zoomedOutLine[Math.floor(year.die/100)].die.push({name:personObj.title , born: year.die, die: year.die, img: personObj.thumbnail.source});
+        data.zoomedInLine[Math.floor(year.die/10)].die.push({name:personObj.title , born: year.die, die: year.die, img: personObj.thumbnail.source});
       }
       console.log(data.zoomedOutLine)
     }
 
     function getYear(extractStr){
       var result = {};
-      if(extractStr.match(/(born).+?\d{4}/i)){
-        result.born = extractStr.match(/(born).+?\d{4}/i)[0].slice(-4)
+      if(extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)){
+        result.born = extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)[0].split(" ")[3]
+      }else if(extractStr.match(/\d+\s\w+\s\d+/g)){
+        result.born = extractStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
+        result.die = extractStr.match(/\d+\s\w+\s\d+/g)[1].split(" ")[2];
       }else {
-        result.born = extractStr.match(/\d{4}.{4,}\d{4}/g)[0].slice(0,4);
-        result.die = extractStr.match(/\d{4}.{4,}\d{4}/g)[0].slice(-4);
+        result.born = extractStr.match(/\w+\s\d+\,\s\d+/g)[0].split(" ")[2];
+        result.die = extractStr.match(/\w+\s\d+\,\s\d+/g)[1].split(" ")[2];
       }
+      console.log(extractStr.match(/\w+\s\d+\,\s\d+/g))
       return result;
     }
 
