@@ -74,11 +74,14 @@ angular.module('timelineApp')
       }else if(extractStr.match(/\d+\s\w+\s\d+/g)){
         result.born = extractStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
         result.die = extractStr.match(/\d+\s\w+\s\d+/g)[1].split(" ")[2];
-      }else {
+      }else if(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)){
+        result.born = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[2];
+        result.die = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[5].slice(0,4);
+      }else if(extractStr.match(/\w+\s\d+\,\s\d+/g)){
         result.born = extractStr.match(/\w+\s\d+\,\s\d+/g)[0].split(" ")[2];
         result.die = extractStr.match(/\w+\s\d+\,\s\d+/g)[1].split(" ")[2];
       }
-      console.log(extractStr.match(/\w+\s\d+\,\s\d+/g))
+      //console.log(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" "))
       return result;
     }
 
