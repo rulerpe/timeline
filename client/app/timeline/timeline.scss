@@ -1,9 +1,15 @@
 .slots {
 	height: 100%;
-	width: 80px;
+	width: 9%;
 	border-left: 1px solid #c9c9c9;
 	display: inline-block;
-	font-size: 0.85em;
+	font-size: 1em;
+}
+.zoomIn{
+	width:0.9%;
+}
+.zoomOut{
+	width:9%;
 }
 
 .slots div {
@@ -19,6 +25,7 @@
 	border-bottom: 1px solid #1d2120;
 	height: 20%;
 	position: relative;
+	font-weight: bold;
 }
 .event p {
 	position: absolute;
@@ -45,3 +52,4 @@ img {
 .year {
 	height: 20%
 }
+

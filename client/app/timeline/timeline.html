@@ -1,4 +1,4 @@
-<div class="slots" ng-repeat ="year in mainLine">
+<div class="slots" ng-repeat ="year in mainLine" ng-class="{'zoomIn': mainLine.length>100}">
 	<div class="born">
 		<div class="person" ng-repeat = "person in year.born">
 			<img src="{{person.img}}" alt="">

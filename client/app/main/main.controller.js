@@ -8,5 +8,10 @@ angular.module('timelineApp')
     $scope.addPerson = function(){
     	$scope.findInfo.addPerson(wikisearch.currentName);
     };
-    $scope.findInfo.generateMainLine(21);
+    $scope.zoom = function(size){
+    	findinfo.generateMainLine(size);
+    	document.getElementById('timeLineContainer').style.width = size<100 ? "100%":"1000%";
+    
+    }
+    $scope.zoom(11);
   });

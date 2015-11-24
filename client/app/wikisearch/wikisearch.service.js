@@ -11,7 +11,7 @@ angular.module('timelineApp')
       var apiEnd = "&callback=JSON_CALLBACK"
       var searchTitle = input.replace(/\s/, "_");
       return $http.jsonp(api + searchTitle + apiEnd).then(function(data) {
-         console.log(data);
+         //console.log(data);
         var wikiList = data.data.query.pages;
         angular.forEach(wikiList, function(value) {
           if ( value.extract.match(/(born)\s\w+\s\d+\,\s\d+/g) || value.extract.match(/\d+\s\w+\s\d+/g) || value.extract.match(/\w+\s\d+\,\s\d+/g) ) {
