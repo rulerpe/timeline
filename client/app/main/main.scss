@@ -1,4 +1,4 @@
-.thing-form {
+/* .thing-form {
     margin: 20px 0;
 }
 
@@ -32,20 +32,59 @@
 .navbar-text {
   margin-left: 15px;
 }
-
-#box {
+ */
+.box{
     position: relative;
     width: 100%;
-    height: 650px;
+    height: 640px;
+
+    margin-top: 10px;
+}
+#legend {
+    float: left;
+    width: 6%;
+    height: 100%;
+    display: block;
+
+}
+
+#content {
+    float: left;
+    width: 93%;
+    height: 100%;
     overflow: scroll;
     overflow-y:hidden;
-    margin-top: 10px;
+    display: block;
 }
 
 #timeLineContainer {
     width: 100%;
     height: 100%;
+
+
 }
+
+#legendTop{
+    width: 100%;
+    height: 40%;
+    padding-top: 90%  
+}
+
+#legendMid{
+    width: 100%;
+    height: 20%;
+    padding-top: 50% 
+
+}
+#legendDown{
+    width: 100%;
+    height: 40%;
+    padding-top: 90% 
+
+}
+
+
+
 .zoom {
     width: 100%;
     margin-left: auto;
@@ -77,7 +116,7 @@
     width: 95%;
     margin: 10px auto 0 auto;
 }
-
+ 
 @media (max-width: 1700px) {
     
-}
+} 

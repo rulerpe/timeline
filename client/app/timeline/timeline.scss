@@ -3,7 +3,7 @@
 	width: 9%;
 	border-left: 1px solid #c9c9c9;
 	display: inline-block;
-	font-size: 1em;
+	font-size: 0.9em;
 }
 .zoomIn{
 	width:0.9%;
@@ -52,4 +52,8 @@ img {
 .year {
 	height: 20%
 }
+
+@media (max-width: 1200px) {
+    
+} 
 

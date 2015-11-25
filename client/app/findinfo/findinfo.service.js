@@ -32,7 +32,7 @@ angular.module('timelineApp')
         year: "900",
         pic: "http://www.infoplease.com/images/pyramid3.gif",
       },{
-        name: "William of Normandy invades England, crowned William I of England (“the Conqueror”).",
+        name: "William of Normandy invades England, crowned William I of England",
         year: "1066",
         pic: "http://ichef.bbci.co.uk/arts/yourpaintings/images/paintings/bab/large/es_bab_88055642_large.jpg",
       },{
@@ -52,7 +52,7 @@ angular.module('timelineApp')
         year: "1914",
         pic: "http://pdxretro.com/wp-content/uploads/2011/09/War-begins-world-war-one_thumb.jpg",
       },{
-        name: "Terrorists Hijackers ram jetliners into twin towers of New York City's World Trade Center and the Pentagon",
+        name: "Terrorists ram jetliners into New York City's World Trade Center and the Pentagon",
         year: "2001",
         pic: "http://www.infoplease.com/images/wtcprior.jpg",
       }
@@ -84,32 +84,34 @@ angular.module('timelineApp')
     }
  
     data.addPerson = function(personObj){
-      console.log(personObj);
       var year = getYear(personObj.extract);
       data.zoomedOutLine[Math.floor(year.born/200)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
       data.zoomedInLine[Math.floor(year.born/20)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
       if(year.die){
-        data.zoomedOutLine[Math.floor(year.die/200)].die.push({name:personObj.title , born: year.die, die: year.die, img: personObj.thumbnail.source});
-        data.zoomedInLine[Math.floor(year.die/20)].die.push({name:personObj.title , born: year.die, die: year.die, img: personObj.thumbnail.source});
+        data.zoomedOutLine[Math.floor(year.die/200)].die.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
+        data.zoomedInLine[Math.floor(year.die/20)].die.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
       }
      // console.log(data.zoomedOutLine)
     }
 
     function getYear(extractStr){
-      var result = {};
+      var result = {born:"", die:""};
       if(extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)){
-        result.born = extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)[0].split(" ")[3]
+        result.born = extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)[0].split(" ")[3];
+      }else if(extractStr.match(/(born)\s\d+\s\w+\s\d+/g)){
+        result.born = extractStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
       }else if(extractStr.match(/\d+\s\w+\s\d+/g)){
+        console.log(extractStr.match(/\d+\s\w+\s\d+/g));
         result.born = extractStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
         result.die = extractStr.match(/\d+\s\w+\s\d+/g)[1].split(" ")[2];
       }else if(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)){
+        console.log(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[6]);
         result.born = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[2];
-        result.die = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[5].slice(0,4);
-      }else if(extractStr.match(/\w+\s\d+\,\s\d+/g)){
+        result.die = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[6].slice(0,-1);
+      }else if(extractStr.match(/\w+\s\d+\,\s\d+\s-\s/g)){
         result.born = extractStr.match(/\w+\s\d+\,\s\d+/g)[0].split(" ")[2];
         result.die = extractStr.match(/\w+\s\d+\,\s\d+/g)[1].split(" ")[2];
       }
-      //console.log(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" "))
       return result;
     }
 

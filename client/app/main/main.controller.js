@@ -5,8 +5,8 @@ angular.module('timelineApp')
   	$scope.title = undefined;
     $scope.wikiSearch = wikisearch.findName;
     $scope.findInfo =  findinfo;
-    $scope.addPerson = function(){
-    	$scope.findInfo.addPerson(wikisearch.currentName);
+    $scope.addPerson = function(tile){
+    	$scope.findInfo.addPerson(wikisearch.currentName[tile]);
     };
     $scope.zoom = function(size){
     	findinfo.generateMainLine(size);

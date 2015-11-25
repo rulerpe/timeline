@@ -4,19 +4,25 @@
 
 <div class="container">
   <input type="text" ng-model="title" placeholder="Enter a name" typeahead="name for name in wikiSearch($viewValue)" class="title form-control">
-  <div class="search btn btn-default" ng-click="addPerson()">Search</div>
+  <div class="search btn btn-default" ng-click="addPerson(title)">Search</div>
 </div>
 <div class="main">
   <div class="zoom">
     <div class="btn btn-default" ng-click="zoom(110)">+</div>
     <div class="btn btn-default" ng-click="zoom(11)">-</div>
   </div>
-  <div id="box">
-    <div id="timeLineContainer">
-      <timeline info></timeline>
+
+  <div class="box">
+    <div id="legend">
+      <div id="legendTop"><p>Birth Year</p></div>
+      <div id="legendMid"><p>Years</p></div>
+      <div id="legendDown"><p>Death Year</p></div>
     </div>
-    
+    <div id="content">
+        <div id="timeLineContainer" timeline></div>
+    </div>
   </div>
+  
 
 </div>
 

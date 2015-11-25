@@ -12,7 +12,7 @@
 		<div class="year">{{year.year}}</div>
 		<div class="person" ng-repeat = "person in year.die">
 			<img src="{{person.img}}" alt="">
-			<p>{{person.name}} {{person.die}}</p>
+			<p>{{person.name}} {{person.die}} ({{person.die-person.born}})</p>
 		</div>
 	</div>
 </div>
