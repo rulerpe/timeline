@@ -80,37 +80,42 @@ angular.module('timelineApp')
       for(var i = 0;i<size;i++){
         data.mainLine.push(arr[i]);
       }
-    //  console.log(data.mainLine)
     }
  
     data.addPerson = function(personObj){
-      var year = getYear(personObj.extract);
-      data.zoomedOutLine[Math.floor(year.born/200)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
-      data.zoomedInLine[Math.floor(year.born/20)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
+      var year = getYear(personObj.content);
+      data.zoomedOutLine[Math.floor(year.born/200)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.img});
+      data.zoomedInLine[Math.floor(year.born/20)].born.push({name:personObj.title , born: year.born, die: year.die, img: personObj.img});
       if(year.die){
-        data.zoomedOutLine[Math.floor(year.die/200)].die.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
-        data.zoomedInLine[Math.floor(year.die/20)].die.push({name:personObj.title , born: year.born, die: year.die, img: personObj.thumbnail.source});
+        data.zoomedOutLine[Math.floor(year.die/200)].die.push({name:personObj.title , born: year.born, die: year.die, img: personObj.img});
+        data.zoomedInLine[Math.floor(year.die/20)].die.push({name:personObj.title , born: year.born, die: year.die, img: personObj.img});
       }
-     // console.log(data.zoomedOutLine)
     }
 
-    function getYear(extractStr){
+    function getYear(contentStr){
       var result = {born:"", die:""};
-      if(extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)){
-        result.born = extractStr.match(/(born)\s\w+\s\d+\,\s\d+/g)[0].split(" ")[3];
-      }else if(extractStr.match(/(born)\s\d+\s\w+\s\d+/g)){
-        result.born = extractStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
-      }else if(extractStr.match(/\d+\s\w+\s\d+/g)){
-        console.log(extractStr.match(/\d+\s\w+\s\d+/g));
-        result.born = extractStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
-        result.die = extractStr.match(/\d+\s\w+\s\d+/g)[1].split(" ")[2];
-      }else if(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)){
-        console.log(extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[6]);
-        result.born = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[2];
-        result.die = extractStr.match(/\w+\s\d+\,\s\d+.+\d+\)/g)[0].split(" ")[6].slice(0,-1);
-      }else if(extractStr.match(/\w+\s\d+\,\s\d+\s-\s/g)){
-        result.born = extractStr.match(/\w+\s\d+\,\s\d+/g)[0].split(" ")[2];
-        result.die = extractStr.match(/\w+\s\d+\,\s\d+/g)[1].split(" ")[2];
+      var birthStr =contentStr.match(/birth_date.*?\n/g)[0];
+      var deathStr =contentStr.match(/death_date.*?\n/g)? contentStr.match(/death_date.*?\n/g)[0]:"";
+      console.log(birthStr,deathStr)
+      if(birthStr.match(/\d+\|\d+\|\d+/g)){
+        //console.log(deathStr.match(/\d+\|\d+\|\d+/g));
+        result.born = birthStr.match(/\d+\|\d+\|\d+/g)[0].split("|")[0];
+      }else if(birthStr.match(/\d+\s\w+\s\d+/g)){
+        result.born = birthStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
+      }else if(birthStr.match(/\d+/g)){
+        result.born = birthStr.match(/\d+/g)[0];
+      }else{
+        result.born = ""
+      }
+
+      if(deathStr.match(/\d+\|\d+\|\d+/g)){
+        result.die = deathStr.match(/\d+\|\d+\|\d+/g)[0].split("|")[0];
+      }else if(deathStr.match(/\d+\s\w+\s\d+/g)){
+        result.die = deathStr.match(/\d+\s\w+\s\d+/g)[0].split(" ")[2];
+      }else if(deathStr.match(/\d+/g)){
+        result.die = deathStr.match(/\d+/g)[0];
+      }else {
+        result.die = "";
       }
       return result;
     }
